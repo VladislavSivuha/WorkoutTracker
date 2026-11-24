@@ -1,0 +1,154 @@
+﻿@model List<TemplateHeader>
+@{
+    ViewData["Title"] = "Шаблоны тренировок";
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/Template.css" asp-append-version="true" />
+}
+
+<div class="main-meta-strip">
+    <div>
+        <span class="font-mono fw-bold u-fs-075">PROTOCOL: WORKOUT_TEMPLATES</span>
+    </div>
+    <div class="font-mono text-uppercase fw-bold u-fs-08" style="letter-spacing: 0.05em;">
+        SESSION: <span class="u-color-accent">ACTIVE</span>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-2">
+    <div>
+        <h1 class="page-title">ШАБЛОНЫ ТРЕНИРОВОК</h1>
+        <p class="page-subtitle">СПИСОК ШАБЛОНОВ // TEMPLATE_LIST</p>
+    </div>
+    <div class="tpl-action-bar-container">
+        <a asp-action="EditTemplate" class="btn-brutalist-primary">
+            <span class="tpl-icon-plus-box">+</span>
+            <span>ДОБАВИТЬ ШАБЛОН // ADD TEMPLATE</span>
+        </a>
+    </div>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+        <div class="tpl-empty-card">
+            <div class="brutalist-corner tl"></div>
+            <div class="brutalist-corner tr"></div>
+            <div class="brutalist-corner bl"></div>
+            <div class="brutalist-corner br"></div>
+            <div class="brutalist-accent-sq tl"></div>
+            <div class="brutalist-accent-sq br"></div>
+
+            <div class="tpl-empty-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="8" width="36" height="36" stroke="#000000" stroke-width="3" fill="#ffffff" />
+                    <rect x="16" y="3" width="16" height="8" stroke="#000000" stroke-width="3" fill="#cd4800" />
+                    <line x1="14" y1="18" x2="34" y2="18" stroke="#000000" stroke-width="2" />
+                    <line x1="14" y1="26" x2="34" y2="26" stroke="#000000" stroke-width="2" />
+                    <line x1="14" y1="34" x2="26" y2="34" stroke="#000000" stroke-width="2" />
+                </svg>
+            </div>
+
+            <div class="tpl-empty-heading">НЕТ ШАБЛОНОВ // NO TEMPLATES</div>
+            <div class="tpl-empty-sub">СОЗДАЙТЕ ПЕРВЫЙ ШАБЛОН, ЧТОБЫ НАЧАТЬ</div>
+        </div>
+}
+else
+{
+        <div class="tpl-stack">
+        @foreach (var tpl in Model)
+        {
+                    <article class="tpl-row-card" id="tpl-card-@tpl.Id">
+                        <div class="brutalist-corner tl"></div>
+                        <div class="brutalist-corner tr"></div>
+                        <div class="brutalist-corner bl"></div>
+                        <div class="brutalist-corner br"></div>
+                        <div class="brutalist-accent-sq tl"></div>
+
+                        <button type="button" class="tpl-header-row" onclick="toggleTemplate('tpl-card-@tpl.Id')" aria-expanded="false">
+                            <div class="tpl-header-left">
+                                <h2 class="tpl-title-text">@tpl.Name</h2>
+                                <h3 class="page-subtitle">@tpl.Description</h3>
+                            </div>
+                            <div class="tpl-header-right">
+                                <span class="tpl-exercise-count">
+                                    УПРАЖНЕНИЙ // EXERCISES: <span id="count-@tpl.Id">@tpl.Specification.Count</span>
+                                </span>
+                                <span class="tpl-toggle-icon" id="icon-@tpl.Id">▼</span>
+                            </div>
+                        </button>
+
+                        <div class="tpl-expanded-body tpl-collapsed" id="body-@tpl.Id">
+                            <div class="tpl-exercise-list">
+                        @foreach (var ex in tpl.Specification)
+                        {
+                                        <div class="tpl-exercise-item">
+                                            <div>
+                                                <div class="tpl-ex-info-name">.. // @ex.Exercise.Name</div>
+                                            </div>
+                                            <div>
+                                                <form asp-action="RemoveExerciseFromTemplate" asp-controller="Template" method="post" class="m-0">
+                                        @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="templateId" value="@tpl.Id" />
+                                                    <input type="hidden" name="exerciseId" value="@ex.ExerciseId" />
+                                                    <button type="submit" class="tpl-btn-remove"
+                                                            onclick="return confirm('Удалить упражнение из шаблона?');">
+                                                        УДАЛИТЬ // REMOVE
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                        }
+                            </div>
+
+                            <div class="tpl-add-exercise-inner-wrap">
+                                <a asp-action="AddExerciseToTemplate" asp-controller="Template" asp-route-templateId="@tpl.Id"
+                                   class="tpl-add-exercise-inner-btn">
+                                    <span class="u-color-accent fw-bold">+</span>
+                                    <span>ДОБАВИТЬ УПРАЖНЕНИЕ // ADD EXERCISE</span>
+                                </a>
+                            </div>
+
+                            <div class="tpl-footer-row">
+                                <div class="d-flex align-items-center flex-wrap gap-2">
+                                    <a asp-action="EditTemplate" asp-route-id="@tpl.Id" class="tpl-btn-edit-template">
+                                        РЕДАКТИРОВАТЬ // EDIT
+                                    </a>
+
+                                    <form asp-action="DeleteTemplate" asp-controller="Template" method="post" class="m-0"
+                                          onsubmit="return confirm('Удалить шаблон «@tpl.Name»?');">
+                                @Html.AntiForgeryToken()
+                                        <input type="hidden" name="templateId" value="@tpl.Id" />
+                                        <button type="submit" class="tpl-btn-delete-template">
+                                            УДАЛИТЬ ШАБЛОН // DELETE TEMPLATE
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+        }
+        </div>
+}
+
+@section Scripts {
+        <script>
+            function toggleTemplate(cardId) {
+                const card = document.getElementById(cardId);
+                if (!card) return;
+                const body = card.querySelector('.tpl-expanded-body');
+                const icon = card.querySelector('.tpl-toggle-icon');
+                const headerBtn = card.querySelector('.tpl-header-row');
+
+                if (body.classList.contains('tpl-collapsed')) {
+                    body.classList.remove('tpl-collapsed');
+                    icon.textContent = '▲';
+                    headerBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    body.classList.add('tpl-collapsed');
+                    icon.textContent = '▼';
+                    headerBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+        </script>
+}

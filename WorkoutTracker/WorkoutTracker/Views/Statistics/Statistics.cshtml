@@ -1,0 +1,209 @@
+﻿@{
+    ViewData["Title"] = "Статистика";
+    var topExercises = ViewBag.TopExercises as List<ExerciseTonnageTop5> ?? new List<ExerciseTonnageTop5>();
+    var topUsers = ViewBag.TopUsers as List<UserTonnageTop3> ?? new List<UserTonnageTop3>();
+    var calendar = ViewBag.Calendar as List<CurrentMonthCalendar> ?? new List<CurrentMonthCalendar>();
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/Statistics.css" asp-append-version="true" />
+}
+
+<div class="main-meta-strip">
+    <div class="d-flex align-items-center gap-2">
+        <span class="font-mono fw-bold u-fs-075">PROTOCOL: STATISTICS_DASHBOARD</span>
+    </div>
+    <div class="font-mono text-uppercase fw-bold u-fs-08" style="letter-spacing: 0.05em;">
+        SESSION: <span class="u-color-accent">ACTIVE</span>
+    </div>
+</div>
+
+<div>
+    <h1 class="page-title">СТАТИСТИКА</h1>
+    <p class="page-subtitle">СВОДКА ПО ТРЕНИРОВКАМ // WORKOUT_SUMMARY</p>
+</div>
+
+<div class="stat-grid-container">
+
+    @* Календарь *@
+    <section class="stat-panel stat-span-2">
+        <div class="brutalist-corner tl"></div>
+        <div class="brutalist-corner tr"></div>
+        <div class="brutalist-corner bl"></div>
+        <div class="brutalist-corner br"></div>
+        <div class="brutalist-accent-sq tl"></div>
+
+        <div class="stat-panel-header">
+            <div class="stat-panel-title">
+                <span>КАЛЕНДАРЬ // CALENDAR</span>
+            </div>
+        </div>
+
+        <div class="stat-cal-top">
+            <div class="stat-cal-month">@ViewBag.CalendarMonthName</div>
+            <div class="stat-cal-legend">
+                <div class="stat-legend-item">
+                    <span class="stat-legend-swatch-orange"></span>
+                    <span>ТРЕНИРОВКА // WORKOUT</span>
+                </div>
+                <div class="stat-legend-item">
+                    <span class="stat-legend-swatch-today"></span>
+                    <span>СЕГОДНЯ // TODAY</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-cal-weekdays">
+            <div class="stat-cal-weekday">ПН</div>
+            <div class="stat-cal-weekday">ВТ</div>
+            <div class="stat-cal-weekday">СР</div>
+            <div class="stat-cal-weekday">ЧТ</div>
+            <div class="stat-cal-weekday">ПТ</div>
+            <div class="stat-cal-weekday">СБ</div>
+            <div class="stat-cal-weekday">ВС</div>
+        </div>
+
+        <div class="stat-cal-days">
+            @foreach (var day in calendar)
+            {
+                if (day.Day == 0)
+                {
+                            <div class="stat-cal-cell stat-other-month"></div>
+                }
+                else
+                {
+                            <div class="stat-cal-cell @(day.HasWorkout ? "stat-workout-day" : "stat-rest-day") @(day.IsToday ? "stat-today" : "")">
+                        @day.Day.ToString("00")
+                            </div>
+                }
+            }
+        </div>
+    </section>
+
+    @* Стрик *@
+    <section class="stat-panel stat-span-1">
+        <div class="brutalist-corner tl"></div>
+        <div class="brutalist-corner tr"></div>
+        <div class="brutalist-corner bl"></div>
+        <div class="brutalist-corner br"></div>
+        <div class="brutalist-accent-sq tl"></div>
+
+        <div class="stat-panel-header">
+            <div class="stat-panel-title">
+                <span>СТРИК // STREAK</span>
+            </div>
+        </div>
+
+        <div class="stat-metric-body">
+            <div class="stat-metric-hero u-color-accent">@ViewBag.StreakWeeks</div>
+            <div class="stat-metric-label">НЕДЕЛЬ ПОДРЯД // WEEKS IN A ROW</div>
+        </div>
+    </section>
+
+    @* Всего тренировок *@
+    <section class="stat-panel stat-span-1">
+        <div class="brutalist-corner tl"></div>
+        <div class="brutalist-corner tr"></div>
+        <div class="brutalist-corner bl"></div>
+        <div class="brutalist-corner br"></div>
+        <div class="brutalist-accent-sq tl"></div>
+
+        <div class="stat-panel-header">
+            <div class="stat-panel-title">
+                <span>ВСЕГО ТРЕНИРОВОК // TOTAL WORKOUTS</span>
+            </div>
+        </div>
+
+        <div class="stat-metric-body">
+            <div class="stat-metric-hero u-color-accent">@ViewBag.TotalWorkouts</div>
+            <div class="stat-metric-label">ТРЕНИРОВОК ЗА ВСЁ ВРЕМЯ // TOTAL SESSIONS</div>
+        </div>
+    </section>
+
+    @* Топ 5 упр по тоннажу *@
+    <section class="stat-panel stat-span-2">
+        <div class="brutalist-corner tl"></div>
+        <div class="brutalist-corner tr"></div>
+        <div class="brutalist-corner bl"></div>
+        <div class="brutalist-corner br"></div>
+        <div class="brutalist-accent-sq tl"></div>
+
+        <div class="stat-top-list">
+            @if (topExercises.Count == 0)
+            {
+                    <div class="stat-top-item u-text-center u-color-muted">
+                        НЕТ ДАННЫХ // NO DATA
+                    </div>
+            }
+            else
+            {
+                @for (int i = 0; i < topExercises.Count; i++)
+                {
+                    var ex = topExercises[i];
+                            <div class="stat-top-item">
+                                <div class="stat-top-left">
+                                    <span class="stat-rank-badge">[@((i + 1).ToString("00"))]</span>
+                                    <span class="stat-exercise-name">@ex.ExerciseName</span>
+                                </div>
+                                <span class="stat-tonnage-val">@ex.Tonnage.ToString("N0") КГ</span>
+                            </div>
+                }
+            }
+        </div>
+
+        <div class="stat-footnote">
+            <span>ФОРМУЛА: ТОННАЖ = ВЕС × ПОВТОРЫ // TONNAGE = WEIGHT × REPS</span>
+            <span>FILTER: ALL_TIME</span>
+        </div>
+    </section>
+
+    @* Топ 3 юзера по тоннажу *@
+    <section class="stat-panel stat-span-3">
+        <div class="brutalist-corner tl"></div>
+        <div class="brutalist-corner tr"></div>
+        <div class="brutalist-corner bl"></div>
+        <div class="brutalist-corner br"></div>
+        <div class="brutalist-accent-sq tl"></div>
+
+        <div class="stat-panel-header">
+            <div class="stat-panel-title">
+                <span>ТОП-3 ПОЛЬЗОВАТЕЛЕЙ ПО ТОННАЖУ // TOP 3 ATHLETES</span>
+            </div>
+        </div>
+
+        <div class="stat-users-row">
+            @if (topUsers.Count == 0)
+            {
+                    <div class="stat-user-col stat-user-col-empty">
+                        НЕТ ДАННЫХ // NO DATA
+                    </div>
+            }
+            else
+            {
+                @for (int i = 0; i < topUsers.Count; i++)
+                {
+                    var u = topUsers[i];
+                    var isWinner = i == 0;
+                    var initials = string.IsNullOrEmpty(u.UserName)
+                        ? "??"
+                        : u.UserName.Substring(0, Math.Min(2, u.UserName.Length)).ToUpper();
+
+                            <div class="stat-user-col @(isWinner ? "stat-winner" : "")">
+                        @if (isWinner)
+                        {
+                                        <div class="stat-winner-marker"></div>
+                        }
+                                <div class="stat-user-rank-tag @(isWinner ? "stat-rank-tag-gold" : "stat-rank-tag-std")">
+                                    [@((i + 1).ToString("00"))]
+                                </div>
+                                <div class="stat-user-avatar">@initials</div>
+                                <div class="stat-user-name">@u.UserName</div>
+                                <div class="stat-user-tonnage">@u.Tonnage.ToString("N0") КГ</div>
+                                <div class="stat-user-tonnage-label">ТОННАЖ // TONNAGE</div>
+                            </div>
+                }
+            }
+        </div>
+    </section>
+
+</div>

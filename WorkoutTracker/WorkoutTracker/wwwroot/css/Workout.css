@@ -1,0 +1,512 @@
+﻿/* ============================================================
+   Workout.css — активная тренировка.
+   Кроссхаиры/акценты — из Core.css.
+   ============================================================ */
+
+.wrk-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.wrk-control-bar {
+    background-color: var(--primary-white);
+    border: 3px solid var(--primary-black);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.wrk-control-form {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.wrk-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 340px;
+}
+
+.wrk-control-label {
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.wrk-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+}
+
+.wrk-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--primary-white);
+    border: 2px solid var(--primary-black);
+    color: var(--primary-black);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 40px 10px 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+    .wrk-select:focus {
+        border-color: var(--accent-orange);
+    }
+
+    .wrk-select:disabled {
+        background-color: var(--gray-light);
+        color: var(--gray-muted);
+        border-color: var(--gray-muted);
+        cursor: not-allowed;
+    }
+
+.wrk-select-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-black);
+}
+
+.wrk-btn-primary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 11px 24px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.wrk-btn-start {
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+    border: 3px solid var(--primary-black);
+}
+
+    .wrk-btn-start:hover {
+        background-color: var(--primary-black);
+        color: var(--primary-white);
+    }
+
+.wrk-btn-finish {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    border: 3px solid var(--accent-orange);
+}
+
+    .wrk-btn-finish:hover {
+        background-color: var(--accent-orange);
+        color: var(--primary-black);
+        border-color: var(--primary-black);
+    }
+
+.wrk-header-block {
+    background-color: var(--primary-white);
+    border: 3px solid var(--primary-black);
+    padding: 18px 24px 14px;
+    position: relative;
+}
+
+.wrk-header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.wrk-header-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wrk-header-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary-black);
+    letter-spacing: -0.5px;
+}
+
+.wrk-header-count {
+    font-family: 'Tektur', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background-color: var(--gray-light);
+    border: 2px solid var(--primary-black);
+    padding: 6px 12px;
+    color: var(--primary-black);
+    white-space: nowrap;
+}
+
+.wrk-header-meta {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+    font-family: 'Tektur', monospace;
+    font-size: 0.7rem;
+    color: var(--primary-black);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.wrk-exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wrk-exercise-card {
+    background-color: var(--primary-white);
+    border: 3px solid var(--primary-black);
+    position: relative;
+}
+
+.wrk-exercise-header {
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.wrk-exercise-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wrk-badge-index {
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border: 1px solid var(--primary-black);
+}
+
+.wrk-exercise-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary-black);
+    letter-spacing: -0.3px;
+    margin: 0;
+}
+
+.wrk-exercise-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wrk-btn-action {
+    background-color: var(--primary-white);
+    border: 2px solid var(--primary-black);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.wrk-btn-remove-ex:hover {
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+}
+
+.wrk-btn-add-set:hover {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+}
+
+.wrk-table-container {
+    border-top: 2px solid var(--primary-black);
+    overflow-x: auto;
+}
+
+.wrk-sets-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+    .wrk-sets-table th {
+        background-color: var(--gray-light);
+        border-bottom: 2px solid var(--primary-black);
+        padding: 8px 14px;
+        font-family: 'Tektur', monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--primary-black);
+        letter-spacing: 0.5px;
+    }
+
+        .wrk-sets-table th.wrk-th-center,
+        .wrk-sets-table td.wrk-td-center {
+            text-align: center;
+        }
+
+    .wrk-sets-table td {
+        background-color: var(--primary-white);
+        border-bottom: 1px solid var(--primary-black);
+        padding: 8px 14px;
+        vertical-align: middle;
+    }
+
+.wrk-set-num {
+    font-family: 'Tektur', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-black);
+}
+
+.wrk-empty-sets-row {
+    text-align: center;
+    padding: 16px;
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+}
+
+.wrk-btn-del-set {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-white);
+    border: 2px solid var(--primary-black);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 1;
+}
+
+    .wrk-btn-del-set:hover {
+        background-color: var(--accent-orange);
+        color: var(--primary-black);
+    }
+
+.wrk-add-set-bar {
+    border-top: 2px solid var(--primary-black);
+    padding: 10px 18px;
+    background-color: #fafafa;
+}
+
+.wrk-add-set-form {
+    margin: 0;
+}
+
+.wrk-add-set-fields {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.wrk-input-num {
+    width: 120px;
+    background-color: var(--primary-white);
+    border: 2px solid var(--primary-black);
+    padding: 6px 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    outline: none;
+}
+
+    .wrk-input-num:focus {
+        border-color: var(--accent-orange);
+    }
+
+.wrk-exercise-footer {
+    padding: 8px 18px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #fafafa;
+    border-top: 1px solid #eeeeee;
+}
+
+.wrk-label-set-count {
+    font-family: 'Tektur', monospace;
+    font-size: 0.7rem;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+}
+
+.wrk-bottom-action-wrap {
+    width: 100%;
+}
+
+.wrk-add-exercise-form {
+    margin: 0;
+}
+
+.wrk-add-exercise-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.wrk-bottom-action-btn {
+    background-color: var(--primary-white);
+    border: 2px dashed var(--primary-black);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+}
+
+    .wrk-bottom-action-btn:hover {
+        background-color: var(--primary-black);
+        border-style: solid;
+        color: var(--primary-white);
+    }
+
+.wrk-empty-state-card {
+    background-color: var(--primary-white);
+    border: 3px solid var(--primary-black);
+    padding: 64px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.wrk-empty-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+}
+
+.wrk-empty-title {
+    font-family: 'Tektur', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary-black);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.wrk-empty-sub {
+    font-family: 'Tektur', monospace;
+    font-size: 0.8rem;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    max-width: 500px;
+}
+
+/* Единая рамка вокруг всей тренировки */
+.wrk-workout-frame {
+    background-color: var(--primary-white);
+    border: 3px solid var(--primary-black);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+    .wrk-workout-frame .wrk-header-block {
+        border: none;
+        border-bottom: 2px solid var(--primary-black);
+    }
+
+    .wrk-workout-frame .wrk-exercise-list {
+        padding: 3px;
+        gap: 3px;
+    }
+
+    .wrk-workout-frame .wrk-exercise-card {
+        border: 2px solid var(--primary-black);
+        margin: 0;
+    }
+
+        .wrk-workout-frame .wrk-exercise-card:last-child {
+            border-bottom: 2px solid var(--primary-black);
+        }
+
+    .wrk-workout-frame .wrk-bottom-action-wrap {
+        border-top: 2px solid var(--primary-black);
+        padding: 14px 20px;
+        background-color: #fafafa;
+    }
+
+@media (max-width: 900px) {
+    .wrk-control-bar,
+    .wrk-control-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .wrk-select-wrapper {
+        max-width: 100%;
+    }
+
+    .wrk-add-exercise-row {
+        flex-direction: column;
+    }
+
+    .wrk-bottom-action-btn {
+        width: 100%;
+    }
+}

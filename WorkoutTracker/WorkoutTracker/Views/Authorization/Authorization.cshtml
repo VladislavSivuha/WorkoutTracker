@@ -1,0 +1,75 @@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Авторизация";
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/Authorization.css" asp-append-version="true" />
+}
+
+<div class="brutalist-bg">
+    <div class="bg-shape-grid"></div>
+    <div class="bg-shape-1"></div>
+    <div class="bg-shape-2"></div>
+</div>
+
+<div class="viewport-frame">
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center py-4">
+        <div class="card-container-wrapper u-maxw-620">
+            <div class="main-brutalist-card">
+                <div class="crosshair-corner crosshair-tl"></div>
+                <div class="crosshair-corner crosshair-tr"></div>
+                <div class="crosshair-corner crosshair-bl"></div>
+                <div class="crosshair-corner crosshair-br"></div>
+
+                <div class="auth-card-inner">
+                    <div class="mb-4">
+                        <h1 class="display-6 auth-title">АВТОРИЗАЦИЯ</h1>
+                        <p class="auth-subtitle">
+                            НАЧНИ ОТСЛЕЖИВАТЬ СВОЙ ПРОГРЕСС. ЛЕГКО.
+                        </p>
+                    </div>
+
+                    <form asp-action="Authorization" method="post" novalidate>
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="status-feedback-banner is-error" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Login" class="form-label-custom">
+                                <span>ЛОГИН</span>
+                                <span class="u-color-accent">Обяз*</span>
+                            </label>
+                            <input asp-for="Login" class="form-control form-control-brutalist" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" autocomplete="username">
+                            <span asp-validation-for="Login" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label-custom">
+                                <span>ПАРОЛЬ</span>
+                                <span class="u-color-accent">от 8 символов*</span>
+                            </label>
+                            <input asp-for="Password" type="password" class="form-control form-control-brutalist" placeholder="ВВЕДИТЕ ПАРОЛЬ" autocomplete="current-password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-brutalist-primary">
+                                <span>ВХОД</span>
+                                <span class="u-fs-125">→</span>
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <a asp-action="Register" class="link-secondary-login">Нет аккаунта? Серьезно? Создай тут</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

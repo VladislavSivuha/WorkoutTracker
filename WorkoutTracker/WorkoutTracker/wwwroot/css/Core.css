@@ -1,0 +1,587 @@
+﻿/* ============================================================
+   Core.css — базовые стили, переменные, утилиты, общие компоненты
+   ============================================================ */
+
+:root {
+    --primary-black: #000000;
+    --primary-white: #ffffff;
+    --accent-orange: #cd4800;
+    --gray-muted: #666666;
+    --gray-light: #f4f4f4;
+    --gray-dark: #222222;
+    --border-thick: 3px solid #000000;
+    --border-med: 2px solid #000000;
+    --border-thin: 1px solid #000000;
+    /* Алиасы для совместимости со старыми именами в разметке */
+    --color-accent: var(--accent-orange);
+    --color-gray-muted: var(--gray-muted);
+    --color-primary-black: var(--primary-black);
+    --color-primary-white: var(--primary-white);
+}
+
+* {
+    box-sizing: border-box;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+@font-face {
+    font-family: 'Tektur';
+    src: url('../fonts/Tektur.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+    font-family: "Tektur", sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 3px solid var(--primary-black);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.font-mono {
+    font-family: 'Tektur', monospace;
+}
+
+/* ── Бейджи ── */
+.badge-orange {
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--primary-black);
+    display: inline-block;
+}
+
+/* ── Layout: сайдбар + основная область ── */
+.dashboard-container {
+    flex: 1;
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+.left-sidebar {
+    width: 270px;
+    min-width: 270px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    border-right: var(--border-thick);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 5;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 24px 20px;
+    border-bottom: 2px solid var(--gray-dark);
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    color: var(--primary-white);
+    text-decoration: none;
+    font-family: 'Tektur', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--gray-dark);
+    border-left: 4px solid transparent;
+    transition: background-color 0.15s ease, border-left-color 0.15s ease;
+}
+
+    .nav-item-link:hover,
+    .nav-item-link.active {
+        background-color: #111111;
+        border-left-color: var(--accent-orange);
+        color: var(--primary-white);
+    }
+
+.nav-index {
+    color: var(--gray-muted);
+    font-size: 0.75rem;
+}
+
+.nav-item-link:hover .nav-index,
+.nav-item-link.active .nav-index {
+    color: var(--accent-orange);
+}
+
+.sidebar-profile {
+    border-top: 2px solid var(--accent-orange);
+    padding: 20px;
+    background-color: #050505;
+}
+
+.avatar-square {
+    width: 42px;
+    height: 42px;
+    background-color: var(--primary-black);
+    border: 2px solid var(--primary-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tektur', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent-orange);
+}
+
+.btn-logout {
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--primary-white);
+    color: var(--primary-white);
+    font-family: 'Tektur', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-top: 14px;
+}
+
+    .btn-logout:hover {
+        background-color: var(--accent-orange);
+        border-color: var(--accent-orange);
+        color: var(--primary-black);
+    }
+
+.main-viewport {
+    flex: 1;
+    padding: 36px 48px;
+    position: relative;
+    background-color: var(--primary-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+.geometric-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-shape-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 260px;
+    height: 260px;
+    background-color: #000000;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+}
+
+.bg-shape-stripe {
+    position: absolute;
+    top: 180px;
+    right: -20px;
+    width: 400px;
+    height: 16px;
+    background-color: #000000;
+    transform: rotate(-15deg);
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 1;
+}
+
+.content-layer {
+    position: relative;
+    z-index: 2;
+}
+
+.main-meta-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary-black);
+    padding-bottom: 12px;
+    margin-bottom: 28px;
+}
+
+.page-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    font-family: 'Tektur', monospace;
+    font-size: 0.85rem;
+    color: var(--gray-muted);
+    letter-spacing: 0.05em;
+}
+
+/* ── Общие кроссхаиры и акцентные квадраты ──
+   Используются во всех карточках/формах. В специфичных файлах
+   НЕ дублировать — только эти классы. */
+.brutalist-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+    .brutalist-corner.tl {
+        top: -3px;
+        left: -3px;
+        border-top: 3px solid var(--primary-black);
+        border-left: 3px solid var(--primary-black);
+    }
+
+    .brutalist-corner.tr {
+        top: -3px;
+        right: -3px;
+        border-top: 3px solid var(--primary-black);
+        border-right: 3px solid var(--primary-black);
+    }
+
+    .brutalist-corner.bl {
+        bottom: -3px;
+        left: -3px;
+        border-bottom: 3px solid var(--primary-black);
+        border-left: 3px solid var(--primary-black);
+    }
+
+    .brutalist-corner.br {
+        bottom: -3px;
+        right: -3px;
+        border-bottom: 3px solid var(--primary-black);
+        border-right: 3px solid var(--primary-black);
+    }
+
+.brutalist-accent-sq {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-orange);
+    border: 1px solid var(--primary-black);
+    pointer-events: none;
+    z-index: 11;
+}
+
+    .brutalist-accent-sq.tl {
+        top: 6px;
+        left: 6px;
+    }
+
+    .brutalist-accent-sq.tr {
+        top: 6px;
+        right: 6px;
+    }
+
+    .brutalist-accent-sq.bl {
+        bottom: 6px;
+        left: 6px;
+    }
+
+    .brutalist-accent-sq.br {
+        bottom: 6px;
+        right: 6px;
+    }
+
+/* ── Терминальная карточка (форма/empty-state) ── */
+.terminal-card {
+    background-color: var(--primary-white);
+    border: var(--border-thick);
+    position: relative;
+    padding: 64px 32px;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    text-align: center;
+}
+
+.form-terminal-card {
+    text-align: left;
+    padding: 36px 32px;
+}
+
+.empty-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border: 3px solid var(--primary-black);
+    background-color: #f7f7f7;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.empty-state-label {
+    font-family: 'Tektur', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+
+.empty-state-sub {
+    font-family: 'Tektur', monospace;
+    font-size: 0.8rem;
+    color: var(--gray-muted);
+    letter-spacing: 0.04em;
+}
+
+/* ── Формы ── */
+.form-label-custom {
+    font-family: 'Tektur', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.05em;
+    color: var(--primary-black);
+}
+
+.form-control-brutalist {
+    width: 100%;
+    border: 2px solid var(--primary-black) !important;
+    background-color: var(--primary-white) !important;
+    color: var(--primary-black) !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.65rem 0.85rem;
+    transition: none;
+}
+
+    .form-control-brutalist:focus {
+        outline: none !important;
+        border-color: var(--primary-black) !important;
+        background-color: #fafafa !important;
+        box-shadow: 4px 4px 0 var(--accent-orange) !important;
+    }
+
+    .form-control-brutalist::placeholder {
+        color: #999999;
+        font-weight: 500;
+        font-family: 'Tektur', monospace;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+    }
+
+textarea.form-control-brutalist {
+    text-transform: none;
+    font-weight: 500;
+    resize: vertical;
+    min-height: 110px;
+}
+
+input[type="password"].form-control-brutalist {
+    text-transform: none;
+}
+
+.brutalist-form {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.brutalist-form-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* ── Кнопки ── */
+.btn-brutalist-primary,
+.btn-brutalist-secondary {
+    height: 56px;
+    border: 3px solid var(--primary-black) !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: none;
+    width: 100%;
+    text-decoration: none;
+}
+
+.btn-brutalist-primary {
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+}
+
+.btn-brutalist-secondary {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+}
+
+    .btn-brutalist-primary:hover,
+    .btn-brutalist-primary:focus,
+    .btn-brutalist-secondary:hover,
+    .btn-brutalist-secondary:focus {
+        background-color: var(--primary-black);
+        color: var(--primary-white);
+        border-color: var(--primary-black) !important;
+    }
+
+    .btn-brutalist-primary:active,
+    .btn-brutalist-secondary:active {
+        transform: translate(2px, 2px);
+    }
+
+/* ── Статусный баннер и ошибки ── */
+.status-feedback-banner {
+    display: none;
+    border: 3px solid var(--primary-black);
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    padding: 12px 14px;
+    font-family: 'Tektur', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.25rem;
+}
+
+    .status-feedback-banner.is-success {
+        display: block;
+        border-left: 8px solid #28a745;
+    }
+
+    .status-feedback-banner.is-error {
+        display: block;
+        color: #ff5555;
+        border-left: 8px solid var(--accent-orange);
+    }
+
+.text-danger {
+    color: #ba1a1a;
+    font-family: 'Tektur', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-top: 4px;
+}
+
+/* ============================================================
+   Утилиты (заменяют inline-стили в разметке)
+   ============================================================ */
+
+/* размеры шрифта */
+.u-fs-125 {
+    font-size: 1.25rem;
+}
+
+.u-fs-1 {
+    font-size: 1rem;
+}
+
+.u-fs-08 {
+    font-size: 0.8rem;
+}
+
+.u-fs-075 {
+    font-size: 0.75rem;
+}
+
+.u-fs-07 {
+    font-size: 0.7rem;
+}
+
+.u-fs-065 {
+    font-size: 0.65rem;
+}
+
+/* цвета */
+.u-color-accent {
+    color: var(--accent-orange);
+}
+
+.u-color-muted {
+    color: var(--gray-muted);
+}
+
+.u-color-black {
+    color: var(--primary-black);
+}
+
+.u-color-white {
+    color: var(--primary-white);
+}
+
+/* ширина/центрирование */
+.u-maxw-620 {
+    max-width: 620px;
+    width: 100%;
+    margin: auto;
+}
+
+.u-w-100px {
+    width: 100px;
+}
+
+.u-w-70px {
+    width: 70px;
+}
+
+/* flex */
+.u-flex-auto {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 14px 24px;
+}
+
+/* прочее */
+.u-cursor-default {
+    cursor: default;
+}
+
+.u-text-center {
+    text-align: center;
+}
+
+.u-tracking-tight {
+    letter-spacing: -0.05em;
+}
+
+.u-tracking-wide {
+    letter-spacing: 0.18em;
+}

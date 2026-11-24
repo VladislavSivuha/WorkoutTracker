@@ -1,0 +1,63 @@
+﻿@model List<Exercise>
+@{
+    ViewData["Title"] = "Добавить упражнение";
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/Template.css" asp-append-version="true" />
+}
+
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-2">
+    <div>
+        <h1 class="page-title">ДОБАВИТЬ УПРАЖНЕНИЕ</h1>
+        <p class="page-subtitle">ШАБЛОН: @ViewBag.TemplateName // ADD_EXERCISE</p>
+    </div>
+    <div>
+        <a asp-action="Template" class="btn-brutalist-primary">
+            <span>← НАЗАД К ШАБЛОНАМ</span>
+        </a>
+    </div>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+        <div class="tpl-empty-card">
+            <div class="tpl-empty-heading">НЕТ ДОСТУПНЫХ УПРАЖНЕНИЙ</div>
+            <div class="tpl-empty-sub">ВСЕ УПРАЖНЕНИЯ УЖЕ ДОБАВЛЕНЫ. КУДА ЕЩЁ?!</div>
+        </div>
+}
+else
+{
+        <div class="tpl-stack">
+        @foreach (var ex in Model)
+        {
+                    <article class="tpl-row-card">
+                        <div class="brutalist-corner tl"></div>
+                        <div class="brutalist-corner tr"></div>
+                        <div class="brutalist-corner bl"></div>
+                        <div class="brutalist-corner br"></div>
+                        <div class="brutalist-accent-sq tl"></div>
+
+                        <div class="tpl-header-row tpl-header-row-static">
+                            <div class="tpl-header-left">
+                                <h2 class="tpl-title-text">@ex.Name</h2>
+                        @if (!string.IsNullOrWhiteSpace(ex.Description))
+                        {
+                                        <h3 class="page-subtitle">@ex.Description</h3>
+                        }
+                            </div>
+                            <div class="tpl-header-right">
+                                <form asp-action="AddExerciseToTemplate" asp-controller="Template" method="post" class="m-0">
+                            @Html.AntiForgeryToken()
+                                    <input type="hidden" name="templateId" value="@ViewBag.TemplateId" />
+                                    <input type="hidden" name="exerciseId" value="@ex.Id" />
+                                    <button type="submit" class="tpl-btn-edit-template">
+                                        + ДОБАВИТЬ // ADD
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+        }
+        </div>
+}

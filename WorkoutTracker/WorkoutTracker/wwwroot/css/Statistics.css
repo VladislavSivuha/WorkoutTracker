@@ -1,0 +1,401 @@
+﻿/* ============================================================
+   Statistics.css — страница статистики.
+   Кроссхаиры/акценты — из Core.css.
+   ============================================================ */
+
+.stat-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+/* Локальное имя, чтобы не конфликтовать с бывшим .stat-card из Core.css */
+.stat-panel {
+    background-color: var(--primary-white);
+    border: 3px solid var(--primary-black);
+    position: relative;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-span-1 {
+    grid-column: span 1;
+}
+
+.stat-span-2 {
+    grid-column: span 2;
+}
+
+.stat-span-3 {
+    grid-column: span 3;
+}
+
+.stat-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary-black);
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+}
+
+.stat-panel-title {
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-cal-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.stat-cal-month {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: var(--primary-black);
+}
+
+.stat-cal-legend {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Tektur', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+}
+
+.stat-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-legend-swatch-orange {
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-orange);
+    border: 1px solid var(--primary-black);
+}
+
+.stat-legend-swatch-today {
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-white);
+    border: 1px solid var(--primary-black);
+    position: relative;
+}
+
+    .stat-legend-swatch-today::after {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        width: 4px;
+        height: 4px;
+        background-color: var(--primary-black);
+    }
+
+.stat-cal-weekdays,
+.stat-cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stat-cal-weekdays {
+    margin-bottom: 6px;
+    text-align: center;
+    max-width: 420px;
+}
+
+.stat-cal-weekday {
+    font-family: 'Tektur', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+    padding: 4px 0;
+}
+
+.stat-cal-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tektur', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    position: relative;
+}
+
+    .stat-cal-cell.stat-rest-day {
+        background-color: var(--primary-white);
+        border: 1px solid #d4d4d4;
+        color: var(--primary-black);
+    }
+
+    .stat-cal-cell.stat-workout-day {
+        background-color: var(--accent-orange);
+        border: 2px solid var(--primary-black);
+        color: var(--primary-black);
+        font-weight: 700;
+    }
+
+    .stat-cal-cell.stat-today::after {
+        content: '';
+        position: absolute;
+        bottom: 3px;
+        right: 3px;
+        width: 6px;
+        height: 6px;
+        background-color: var(--primary-black);
+    }
+
+    .stat-cal-cell.stat-other-month {
+        background-color: var(--gray-light);
+        border: 1px solid transparent;
+        color: #b0b0b0;
+        font-weight: 400;
+    }
+
+.stat-metric-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.stat-metric-hero {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--primary-black);
+    margin-bottom: 6px;
+    letter-spacing: -2px;
+}
+
+.stat-metric-label {
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.stat-top-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.stat-top-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--primary-black);
+}
+
+    .stat-top-item:last-child {
+        border-bottom: none;
+    }
+
+.stat-top-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stat-rank-badge {
+    font-family: 'Tektur', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+    border: 2px solid var(--primary-black);
+    padding: 2px 6px;
+    min-width: 38px;
+    text-align: center;
+}
+
+.stat-exercise-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+    color: var(--primary-black);
+}
+
+.stat-tonnage-val {
+    font-family: 'Tektur', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.stat-footnote {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--gray-muted);
+    font-family: 'Tektur', monospace;
+    font-size: 0.65rem;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.stat-users-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 2px solid var(--primary-black);
+    background-color: var(--primary-black);
+}
+
+.stat-user-col {
+    background-color: var(--primary-white);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+    .stat-user-col:not(:last-child) {
+        border-right: 2px solid var(--primary-black);
+    }
+
+/* пустое состояние внутри .stat-users-row */
+.stat-user-col-empty {
+    grid-column: span 3;
+    color: var(--gray-muted);
+    text-align: center;
+    padding: 24px 0;
+}
+
+.stat-winner-marker {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-orange);
+    border: 1px solid var(--primary-black);
+}
+
+.stat-user-rank-tag {
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding: 2px 8px;
+}
+
+.stat-rank-tag-gold {
+    background-color: var(--accent-orange);
+    color: var(--primary-black);
+    border: 2px solid var(--primary-black);
+}
+
+.stat-rank-tag-std {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+    border: 2px solid var(--primary-black);
+}
+
+.stat-user-avatar {
+    width: 52px;
+    height: 52px;
+    border: 2px solid var(--primary-black);
+    background-color: var(--primary-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tektur', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    margin-bottom: 14px;
+}
+
+.stat-user-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+    color: var(--primary-black);
+}
+
+.stat-user-tonnage {
+    font-family: 'Tektur', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+    margin-bottom: 4px;
+}
+
+.stat-user-tonnage-label {
+    font-family: 'Tektur', monospace;
+    font-size: 0.65rem;
+    color: var(--gray-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 1024px) {
+    .stat-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-span-2,
+    .stat-span-1,
+    .stat-span-3 {
+        grid-column: span 1;
+    }
+
+    .stat-users-row {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-user-col:not(:last-child) {
+        border-right: none;
+        border-bottom: 2px solid var(--primary-black);
+    }
+}

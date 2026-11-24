@@ -1,0 +1,329 @@
+﻿/* ============================================================
+   Template.css — список шаблонов и добавление упражнений.
+   Кроссхаиры/акценты — из Core.css.
+   ============================================================ */
+
+.tpl-admin-directive {
+    font-family: 'Tektur', monospace;
+    font-size: 0.65rem;
+    color: var(--gray-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.tpl-action-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.tpl-icon-plus-box {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-orange);
+    font-family: 'Tektur', monospace;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    border: 1px solid var(--primary-black);
+}
+
+.btn-brutalist-primary:hover .tpl-icon-plus-box {
+    background: var(--accent-orange);
+    color: var(--primary-black);
+}
+
+.tpl-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.tpl-row-card {
+    position: relative;
+    background: var(--primary-white);
+    border: var(--border-thick);
+    width: 100%;
+}
+
+.tpl-header-row {
+    width: 100%;
+    background: var(--primary-white);
+    border: none;
+    padding: 18px 24px 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.12s ease;
+    position: relative;
+}
+
+    .tpl-header-row:hover {
+        background: var(--gray-light);
+    }
+
+/* статичный (без клика) вариант заголовка — для AddExerciseToTemplate */
+.tpl-header-row-static {
+    cursor: default;
+}
+
+.tpl-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.tpl-title-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--primary-black);
+    margin: 0;
+}
+
+.tpl-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.tpl-exercise-count {
+    color: var(--gray-muted);
+    font-weight: 700;
+}
+
+    .tpl-exercise-count span {
+        color: var(--primary-black);
+    }
+
+.tpl-toggle-icon {
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary-black);
+    background: var(--primary-white);
+    line-height: 1;
+    font-weight: bold;
+    transition: all 0.15s ease;
+}
+
+.tpl-header-row:hover .tpl-toggle-icon {
+    background: var(--primary-black);
+    color: var(--primary-white);
+}
+
+.tpl-expanded-body {
+    border-top: 2px solid var(--primary-black);
+    background: var(--primary-white);
+    display: block;
+}
+
+    .tpl-expanded-body.tpl-collapsed {
+        display: none;
+    }
+
+.tpl-exercise-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tpl-exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px 14px 24px;
+    background: var(--primary-white);
+    border-bottom: 2px solid var(--primary-black);
+    transition: background-color 0.12s ease;
+}
+
+    .tpl-exercise-item:hover {
+        background: #fafafa;
+    }
+
+.tpl-ex-info-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+    color: var(--primary-black);
+}
+
+.tpl-ex-info-meta {
+    font-family: 'Tektur', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--primary-black);
+}
+
+.tpl-slash-orange {
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin: 0 4px;
+}
+
+.tpl-btn-remove {
+    background: var(--primary-white);
+    border: 2px solid var(--primary-black);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.12s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .tpl-btn-remove:hover {
+        background: var(--accent-orange);
+        color: var(--primary-black);
+        border-color: var(--primary-black);
+    }
+
+.tpl-add-exercise-inner-wrap {
+    padding: 12px 20px;
+}
+
+.tpl-add-exercise-inner-btn {
+    width: 100%;
+    background: var(--primary-white);
+    border: 2px dashed var(--primary-black);
+    padding: 12px;
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+    text-decoration: none;
+}
+
+    .tpl-add-exercise-inner-btn:hover {
+        background: var(--primary-black);
+        color: var(--primary-white);
+        border-style: solid;
+    }
+
+.tpl-footer-row {
+    border-top: 2px solid var(--primary-black);
+    padding: 12px 20px 12px 24px;
+    background: var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tpl-timestamp-meta {
+    font-family: 'Tektur', monospace;
+    font-size: 0.68rem;
+    color: var(--gray-muted);
+    letter-spacing: 0.05em;
+}
+
+.tpl-btn-delete-template,
+.tpl-btn-edit-template {
+    background: var(--primary-white);
+    border: 2px solid var(--primary-black);
+    color: var(--primary-black);
+    font-family: 'Tektur', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    box-sizing: border-box;
+    transition: all 0.12s ease;
+}
+
+    .tpl-btn-delete-template:hover {
+        background: var(--accent-orange);
+        color: var(--primary-black);
+        border-color: var(--primary-black);
+    }
+
+    .tpl-btn-edit-template:hover {
+        background: var(--primary-black);
+        color: var(--primary-white);
+        border-color: var(--primary-black);
+    }
+
+.tpl-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tpl-empty-card {
+    position: relative;
+    background: var(--primary-white);
+    border: var(--border-thick);
+    padding: 56px 32px;
+    text-align: center;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.tpl-empty-icon {
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.tpl-empty-heading {
+    font-family: 'Tektur', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.tpl-empty-sub {
+    font-family: 'Tektur', monospace;
+    font-size: 0.72rem;
+    color: var(--gray-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}

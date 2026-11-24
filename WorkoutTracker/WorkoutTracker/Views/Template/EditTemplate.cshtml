@@ -1,0 +1,69 @@
+﻿@model TemplateHeader
+@{
+    ViewData["Title"] = "Редактирование шаблона";
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/ExerciseEdit.css" asp-append-version="true" />
+}
+
+<div class="main-meta-strip">
+    <div class="d-flex align-items-center gap-2">
+        <span class="font-mono fw-bold u-fs-075">PROTOCOL: TEMPLATE_EDIT</span>
+    </div>
+    <div class="font-mono text-uppercase fw-bold u-fs-08" style="letter-spacing: 0.05em;">
+        MODE: <span class="u-color-accent">EDIT</span>
+    </div>
+</div>
+
+<div>
+    <h1 class="page-title">РЕДАКТИРОВАНИЕ</h1>
+    <p class="page-subtitle">ШАБЛОН // TEMPLATE_EDIT</p>
+</div>
+
+<div class="terminal-card form-terminal-card">
+    <div class="brutalist-corner tl"></div>
+    <div class="brutalist-corner tr"></div>
+    <div class="brutalist-corner bl"></div>
+    <div class="brutalist-corner br"></div>
+    <div class="brutalist-accent-sq tl"></div>
+    <div class="brutalist-accent-sq br"></div>
+
+    <form method="post" asp-action="EditTemplate" class="brutalist-form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <div asp-validation-summary="ModelOnly" class="status-feedback-banner is-error" role="alert"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label-custom">
+                <span>НАЗВАНИЕ</span>
+                <span class="u-color-accent">Обяз*</span>
+            </label>
+            <input asp-for="Name" class="form-control form-control-brutalist" placeholder="НАПРИМЕР: ГРУДЬ + ТРИЦЕПС" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Description" class="form-label-custom">
+                <span>ОПИСАНИЕ</span>
+            </label>
+            <textarea asp-for="Description" class="form-control form-control-brutalist" rows="4" placeholder="КОММЕНТАРИЙ К ШАБЛОНУ"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="brutalist-form-actions">
+            <button type="submit" class="btn btn-brutalist-primary">
+                <span>СОХРАНИТЬ</span>
+                <span class="u-fs-125">→</span>
+            </button>
+            <a asp-action="Template" class="btn btn-brutalist-secondary">
+                <span>ОТМЕНА</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

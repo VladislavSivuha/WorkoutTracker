@@ -1,0 +1,120 @@
+﻿@model List<Exercise>
+@{
+    ViewData["Title"] = "Каталог упражнений";
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/ExerciseCard.css" asp-append-version="true" />
+}
+
+<div class="main-meta-strip">
+    <div class="d-flex align-items-center gap-2">
+        <span class="font-mono fw-bold u-fs-075">PROTOCOL: EXERCISE_CATALOG</span>
+    </div>
+    <div class="font-mono text-uppercase fw-bold u-fs-08" style="letter-spacing: 0.05em;">
+        SESSION: <span class="u-color-accent">ACTIVE</span>
+    </div>
+</div>
+
+<div>
+    <h1 class="page-title">УПРАЖНЕНИЯ</h1>
+    <p class="page-subtitle">КАТАЛОГ УПРАЖНЕНИЙ // EXERCISE_CATALOG</p>
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+        <div class="page-actions-bar">
+            <a asp-action="Create" class="btn-add-exercise">
+                <span class="btn-add-icon">+</span>
+                <span>ДОБАВИТЬ УПРАЖНЕНИЕ // ADD EXERCISE</span>
+            </a>
+        </div>
+}
+
+<div class="cards-container">
+    @foreach (var e in Model)
+    {
+            <div class="ironlog-exercise-card" id="card-@e.Id">
+                <div class="exercise-card-corner tl"></div>
+                <div class="exercise-card-corner tr"></div>
+                <div class="exercise-card-corner bl"></div>
+                <div class="exercise-card-corner br"></div>
+                <div class="brutalist-accent-sq tl"></div>
+                <div class="brutalist-accent-sq br"></div>
+
+                <div class="card-image-block">
+                    <div class="blueprint-grid"></div>
+                @if (!string.IsNullOrEmpty(e.ImageUrl))
+                {
+                            <img src="@e.ImageUrl" alt="@e.Name" class="exercise-image" />
+                }
+                else
+                {
+                            <svg class="exercise-illustration" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="0" y1="0" x2="360" y2="200" stroke="#d5d5d5" stroke-width="1.5" stroke-dasharray="4 4" />
+                                <line x1="0" y1="200" x2="360" y2="0" stroke="#d5d5d5" stroke-width="1.5" stroke-dasharray="4 4" />
+                                <line x1="180" y1="20" x2="180" y2="180" stroke="#e0e0e0" stroke-width="1" />
+                                <line x1="30" y1="100" x2="330" y2="100" stroke="#e0e0e0" stroke-width="1" />
+                                <rect x="90" y="55" width="12" height="90" fill="#000000" />
+                                <rect x="106" y="65" width="8" height="70" fill="#000000" />
+                                <rect x="117" y="75" width="6" height="50" fill="#000000" />
+                                <rect x="123" y="96" width="114" height="8" fill="#000000" />
+                                <rect x="160" y="93" width="40" height="14" fill="#cd4800" />
+                                <rect x="237" y="75" width="6" height="50" fill="#000000" />
+                                <rect x="246" y="65" width="8" height="70" fill="#000000" />
+                                <rect x="258" y="55" width="12" height="90" fill="#000000" />
+                                <rect x="123" y="92" width="4" height="16" fill="#000000" />
+                                <rect x="233" y="92" width="4" height="16" fill="#000000" />
+                            </svg>
+                }
+                </div>
+
+                <div class="card-body-block">
+                    <h2 class="exercise-title">@e.Name</h2>
+
+                    <button type="button" class="desc-toggle-btn" id="toggle-desc-@e.Id" onclick="toggleCardDescription('@e.Id')">
+                        <span>ОПИСАНИЕ // DESCRIPTION</span>
+                        <span id="toggle-icon-@e.Id">▼</span>
+                    </button>
+
+                    <div class="desc-content-block" id="desc-block-@e.Id" style="display: none;">
+                        <p class="desc-text">@e.Description</p>
+                    </div>
+
+                @if (User.IsInRole("Admin"))
+                {
+                            <div class="admin-section">
+                                <div class="admin-btn-group">
+                                    <form asp-action="EditExercise" asp-controller="Exercise" method="get" asp-route-id="@e.Id">
+                                        <button type="submit" class="admin-btn admin-btn-edit">РЕДАКТИРОВАТЬ // EDIT</button>
+                                    </form>
+                                    <form asp-action="DeleteExecriseById" asp-controller="Exercise" method="post" asp-route-id="@e.Id">
+                                        <button type="submit" class="admin-btn admin-btn-delete">УДАЛИТЬ // DELETE</button>
+                                    </form>
+                                </div>
+                            </div>
+                }
+                </div>
+            </div>
+    }
+</div>
+
+@section Scripts {
+        <script>
+            function toggleCardDescription(id) {
+                const content = document.getElementById('desc-block-' + id);
+                const icon = document.getElementById('toggle-icon-' + id);
+                const btn = document.getElementById('toggle-desc-' + id);
+
+                if (content.style.display === 'none' || content.style.display === '') {
+                    content.style.display = 'block';
+                    icon.textContent = '▲';
+                    btn.classList.add('is-active');
+                } else {
+                    content.style.display = 'none';
+                    icon.textContent = '▼';
+                    btn.classList.remove('is-active');
+                }
+            }
+        </script>
+}

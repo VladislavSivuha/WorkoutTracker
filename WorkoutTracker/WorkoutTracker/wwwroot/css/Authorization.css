@@ -1,0 +1,154 @@
+﻿/* ============================================================
+   Authorization.css — только для Authorization/Register.
+   Общие кнопки/формы/кроссхаиры — в Core.css.
+   ============================================================ */
+
+.brutalist-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: var(--primary-white);
+}
+
+.bg-shape-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 48vw;
+    height: 100vh;
+    background-color: var(--primary-black);
+    clip-path: polygon(32% 0, 100% 0, 100% 100%, 0% 100%);
+    opacity: 0.05;
+}
+
+.bg-shape-2 {
+    position: absolute;
+    bottom: -10vw;
+    left: -5vw;
+    width: 42vw;
+    height: 52vw;
+    background-color: var(--primary-black);
+    opacity: 0.04;
+    transform: rotate(14deg);
+}
+
+.bg-shape-3 {
+    position: absolute;
+    top: 15vh;
+    left: 8vw;
+    width: 280px;
+    height: 8px;
+    background-color: var(--accent-orange);
+    opacity: 0.9;
+}
+
+.bg-shape-grid {
+    position: absolute;
+    inset: 0;
+    background-size: 60px 60px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+}
+
+.viewport-frame {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid var(--primary-black);
+}
+
+.card-container-wrapper {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    padding: 4px;
+}
+
+.main-brutalist-card {
+    border: 3px solid var(--primary-black);
+    background: var(--primary-white);
+    position: relative;
+}
+
+/* Уголки карточки авторизации — крупнее общих (18px, -9px) — оставляем локально */
+.crosshair-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.crosshair-tl {
+    top: -9px;
+    left: -9px;
+    border-top: 3px solid var(--primary-black);
+    border-left: 3px solid var(--primary-black);
+}
+
+.crosshair-tr {
+    top: -9px;
+    right: -9px;
+    border-top: 3px solid var(--primary-black);
+    border-right: 3px solid var(--primary-black);
+}
+
+.crosshair-bl {
+    bottom: -9px;
+    left: -9px;
+    border-bottom: 3px solid var(--primary-black);
+    border-left: 3px solid var(--primary-black);
+}
+
+.crosshair-br {
+    bottom: -9px;
+    right: -9px;
+    border-bottom: 3px solid var(--primary-black);
+    border-right: 3px solid var(--primary-black);
+}
+
+.link-secondary-login {
+    font-family: 'Tektur', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--primary-black);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+    .link-secondary-login:hover {
+        background-color: var(--accent-orange);
+        color: var(--primary-black);
+    }
+
+/* Заголовок/подзаголовок на страницах auth */
+.auth-title {
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0;
+}
+
+.auth-subtitle {
+    font-family: 'Tektur', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--gray-muted);
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.auth-card-inner {
+    padding: 24px;
+    background-color: var(--primary-white);
+}
+
+@media (min-width: 768px) {
+    .auth-card-inner {
+        padding: 48px;
+    }
+}

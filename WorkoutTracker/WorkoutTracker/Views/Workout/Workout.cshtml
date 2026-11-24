@@ -1,0 +1,249 @@
+﻿@model WorkoutHeader?
+@{
+    ViewData["Title"] = "Тренировка";
+    var templates = ViewBag.Templates as List<TemplateHeader> ?? new List<TemplateHeader>();
+    var allExercises = ViewBag.AllExercises as List<Exercise> ?? new List<Exercise>();
+}
+
+@section Styles {
+        <link rel="stylesheet" href="~/css/Workout.css" asp-append-version="true" />
+}
+
+<div class="main-meta-strip">
+    <div class="d-flex align-items-center gap-2">
+        <span class="font-mono fw-bold u-fs-075">PROTOCOL: ACTIVE_WORKOUT</span>
+    </div>
+    <div class="font-mono text-uppercase fw-bold u-fs-08" style="letter-spacing: 0.05em;">
+        SESSION: <span class="u-color-accent">ACTIVE</span>
+    </div>
+</div>
+
+<div>
+    <h1 class="page-title">ТРЕНИРОВКА</h1>
+    <p class="page-subtitle">АКТИВНАЯ ТРЕНИРОВКА // ACTIVE_WORKOUT</p>
+</div>
+
+<div class="wrk-container">
+
+    <div class="wrk-control-bar">
+        <div class="brutalist-corner tl"></div>
+        <div class="brutalist-corner tr"></div>
+        <div class="brutalist-corner bl"></div>
+        <div class="brutalist-corner br"></div>
+        <div class="brutalist-accent-sq tl"></div>
+
+        @if (Model == null)
+        {
+                <form asp-action="Start" method="post" class="wrk-control-form">
+                @Html.AntiForgeryToken()
+                    <div class="wrk-control-group">
+                        <label class="wrk-control-label" for="templateHeaderId">ВЫБЕРИ ШАБЛОН // SELECT TEMPLATE</label>
+                        <div class="wrk-select-wrapper">
+                            <select id="templateHeaderId" name="templateHeaderId" class="wrk-select" required>
+                            @foreach (var tpl in templates)
+                            {
+                                        <option value="@tpl.Id">@tpl.Name</option>
+                            }
+                            </select>
+                            <span class="wrk-select-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="wrk-btn-primary wrk-btn-start">
+                            <span>+ НАЧАТЬ ТРЕНИРОВКУ // START WORKOUT</span>
+                        </button>
+                    </div>
+                </form>
+        }
+        else
+        {
+                <div class="wrk-control-group">
+                    <label class="wrk-control-label">ШАБЛОН // TEMPLATE</label>
+                    <div class="wrk-select-wrapper">
+                        <select class="wrk-select" disabled>
+                            <option>@Model.Name</option>
+                        </select>
+                        <span class="wrk-select-arrow">▼</span>
+                    </div>
+                </div>
+                <div>
+                    <form asp-action="Finish" method="post" class="m-0"
+                          onsubmit="return confirm('Завершить тренировку?');">
+                    @Html.AntiForgeryToken()
+                        <input type="hidden" name="workoutId" value="@Model.Id" />
+                        <button type="submit" class="wrk-btn-primary wrk-btn-finish">
+                            <span>■ ЗАВЕРШИТЬ ТРЕНИРОВКУ // FINISH WORKOUT</span>
+                        </button>
+                    </form>
+                </div>
+        }
+    </div>
+
+    @if (Model == null)
+    {
+            <div class="wrk-empty-state-card">
+                <div class="brutalist-corner tl"></div>
+                <div class="brutalist-corner tr"></div>
+                <div class="brutalist-corner bl"></div>
+                <div class="brutalist-corner br"></div>
+                <div class="brutalist-accent-sq tl"></div>
+                <div class="brutalist-accent-sq br"></div>
+
+                <svg class="wrk-empty-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="14" y="37" width="52" height="6" fill="#000000" />
+                    <rect x="34" y="35" width="12" height="10" fill="#cd4800" stroke="#000000" stroke-width="2" />
+                    <rect x="22" y="24" width="5" height="32" fill="#000000" />
+                    <rect x="16" y="28" width="4" height="24" fill="#000000" />
+                    <rect x="10" y="34" width="4" height="12" fill="#000000" />
+                    <rect x="53" y="24" width="5" height="32" fill="#000000" />
+                    <rect x="60" y="28" width="4" height="24" fill="#000000" />
+                    <rect x="66" y="34" width="4" height="12" fill="#000000" />
+                    <rect x="27" y="33" width="3" height="14" fill="#cd4800" />
+                    <rect x="50" y="33" width="3" height="14" fill="#cd4800" />
+                </svg>
+
+                <div class="wrk-empty-title">ТРЕНИРОВКА НЕ НАЧАТА // NO ACTIVE WORKOUT</div>
+                <div class="wrk-empty-sub">ВЫБЕРИ ШАБЛОН И НАЖМИ «НАЧАТЬ» // SELECT TEMPLATE AND PRESS START</div>
+            </div>
+    }
+    else
+    {
+            <div class="wrk-workout-frame">
+                <div class="brutalist-corner tl"></div>
+                <div class="brutalist-corner tr"></div>
+                <div class="brutalist-corner bl"></div>
+                <div class="brutalist-corner br"></div>
+                <div class="brutalist-accent-sq tl"></div>
+                <div class="brutalist-accent-sq br"></div>
+
+                <div class="wrk-header-block">
+                    <div class="wrk-header-top">
+                        <div class="wrk-header-titles">
+                            <div class="wrk-header-name">@Model.Name</div>
+                        </div>
+                        <div class="wrk-header-count">УПРАЖНЕНИЙ: @Model.Specification.Count</div>
+                    </div>
+
+                    <div class="wrk-header-meta">
+                        <span>НАЧАЛО // STARTED: <strong>@Model.StartedAt.ToString("yyyy-MM-dd HH:mm")</strong></span>
+                    </div>
+                </div>
+
+                <div class="wrk-exercise-list">
+                @{
+                    var ordered = Model.Specification.OrderBy(e => e.Position).ToList();
+                }
+                @for (int i = 0; i < ordered.Count; i++)
+                {
+                    var ex = ordered[i];
+                    var exIndex = i + 1;
+                            <div class="wrk-exercise-card">
+                                <div class="brutalist-corner tl"></div>
+                                <div class="brutalist-corner tr"></div>
+                                <div class="brutalist-corner bl"></div>
+                                <div class="brutalist-corner br"></div>
+                                <div class="brutalist-accent-sq tl"></div>
+
+                                <div class="wrk-exercise-header">
+                                    <div class="wrk-exercise-title-group">
+                                        <span class="wrk-badge-index">[@exIndex.ToString("00")]</span>
+                                        <h3 class="wrk-exercise-title">@ex.Exercise.Name</h3>
+                                    </div>
+                                    <div class="wrk-exercise-actions">
+                                        <form asp-action="RemoveExercise" method="post" class="m-0"
+                                              onsubmit="return confirm('Удалить упражнение из тренировки?');">
+                                    @Html.AntiForgeryToken()
+                                            <input type="hidden" name="workoutExerciseId" value="@ex.Id" />
+                                            <button type="submit" class="wrk-btn-action wrk-btn-remove-ex">
+                                                УДАЛИТЬ УПРАЖНЕНИЕ // REMOVE
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="wrk-table-container">
+                                    <table class="wrk-sets-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="wrk-th-center u-w-100px">ПОДХОД // SET</th>
+                                                <th>ВЕС (КГ) // WEIGHT</th>
+                                                <th>ПОВТОРЫ // REPS</th>
+                                                <th class="wrk-th-center u-w-70px">УДАЛИТЬ // REMOVE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    @if (ex.Sets.Count == 0)
+                                    {
+                                                    <tr>
+                                                        <td colspan="4" class="wrk-empty-sets-row">НЕТ ПОДХОДОВ // NO SETS RECORDED</td>
+                                                    </tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var set in ex.Sets.OrderBy(s => s.SetNumber))
+                                        {
+                                                            <tr>
+                                                                <td class="wrk-td-center">
+                                                                    <span class="wrk-set-num">@set.SetNumber.ToString("00")</span>
+                                                                </td>
+                                                                <td>@set.Weight</td>
+                                                                <td>@set.Reps</td>
+                                                                <td class="wrk-td-center">
+                                                                    <form asp-action="RemoveSet" method="post" class="m-0">
+                                                        @Html.AntiForgeryToken()
+                                                                        <input type="hidden" name="setId" value="@set.Id" />
+                                                                        <button type="submit" class="wrk-btn-del-set" title="Удалить подход">×</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                        }
+                                    }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="wrk-add-set-bar">
+                                    <form asp-action="AddSet" method="post" class="wrk-add-set-form">
+                                @Html.AntiForgeryToken()
+                                        <input type="hidden" name="workoutExerciseId" value="@ex.Id" />
+                                        <div class="wrk-add-set-fields">
+                                            <input type="number" name="weight" class="wrk-input-num" placeholder="ВЕС" step="0.5" min="0" required />
+                                            <input type="number" name="reps" class="wrk-input-num" placeholder="ПОВТОРЫ" min="1" required />
+                                            <button type="submit" class="wrk-btn-action wrk-btn-add-set">
+                                                + ДОБАВИТЬ ПОДХОД // ADD SET
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="wrk-exercise-footer">
+                                    <span class="wrk-label-set-count">SETS: <strong>@ex.Sets.Count</strong></span>
+                                </div>
+                            </div>
+                }
+                </div>
+
+                <div class="wrk-bottom-action-wrap">
+                    <form asp-action="AddExercise" method="post" class="wrk-add-exercise-form">
+                    @Html.AntiForgeryToken()
+                        <input type="hidden" name="workoutId" value="@Model.Id" />
+                        <div class="wrk-add-exercise-row">
+                            <div class="wrk-select-wrapper" style="flex: 1;">
+                                <select name="exerciseId" class="wrk-select" required>
+                                    <option value="">— ВЫБЕРИ УПРАЖНЕНИЕ // SELECT EXERCISE —</option>
+                                @foreach (var ex in allExercises)
+                                {
+                                            <option value="@ex.Id">@ex.Name</option>
+                                }
+                                </select>
+                                <span class="wrk-select-arrow">▼</span>
+                            </div>
+                            <button type="submit" class="wrk-bottom-action-btn u-flex-auto">
+                                <span>+ ДОБАВИТЬ УПРАЖНЕНИЕ // ADD EXERCISE</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    }
+</div>
