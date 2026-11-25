@@ -4,3 +4,9 @@
 
 /WorkoutTracker/.vs/Homework
 .vs/ 
+WorkoutTracker/WorkoutTracker/bin
+WorkoutTracker/WorkoutTracker/obj
+WorkoutTracker/bin
+WorkoutTracker/obj
+bin/
+obj/

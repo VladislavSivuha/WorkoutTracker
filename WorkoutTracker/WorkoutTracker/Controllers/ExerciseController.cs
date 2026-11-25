@@ -33,7 +33,7 @@ namespace WorkoutTracker.Controllers
             await _exerciseService.UpdateAsync(exercise.Id, exercise);
             return RedirectToAction("Exercise");
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Create(Exercise exercise)
         {
             await _exerciseService.CreateAsync(new Exercise("", "", ""));
